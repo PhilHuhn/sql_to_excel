@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "sql query to excel"
+version = "0.1.0"
+description = "Your project description"
+authors = ["Your Name <your.email@example.com>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "^1.3.3"
+openpyxl = "^3.0.9"
+sqlalchemy = "^1.4.25"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

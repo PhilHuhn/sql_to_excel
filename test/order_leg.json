@@ -1,0 +1,194 @@
+{
+  "colors": {
+    "green": "1FD69F",
+    "blue": "4C93AB",
+    "black": "000000",
+    "white": "FFFFFF",
+    "red": "f3845e",
+    "grey": "7A7A7A",
+    "darkgrey": "4B4858"
+  },
+  "queries": [
+    {
+      "name": "emission_data",
+      "query": "SELECT id_order, id_leg, accounting_month, co2e_kg, customer, contractor, mode, vehicle, weight_kg, distance_km FROM DWH.[order_legs] WHERE {where}"
+    }
+  ],
+  "sheets": [
+    {
+      "sheet_name": "Overview",
+      "formatting": [
+        {
+            "type": "range",
+            "start": "A:A",
+            "background_color": "green",
+            "width": 5,
+            "note": "narrow column for optical separation"
+        },
+        {
+          "type": "range",
+          "start": "B2",
+          "value": "Carbon Emissions Report",
+          "text": {
+            "font_color": "blue",
+            "font_size": 14,
+            "bold": true
+          },
+          "note": "Title of the sheet"
+        },
+        {
+          "type": "range",
+          "start": "B3",
+          "end": "C3",
+          "background_color": "green",
+          "text": {
+            "font_color": "black",
+            "font_size": 12,
+            "bold": true
+          }
+        },
+        {
+          "type": "range",
+          "start": "A4",
+          "value": "Total emissions"
+        },
+        {
+          "type": "range",
+          "start": "C4",
+          "data": {
+            "query": "emission_data",
+            "formula": {
+              "column": "co2e_kg",
+              "function": "sum"
+            }
+            },
+          "text": {
+            "font_color": "black",
+            "font_size": 12
+          }
+        }
+      ]
+    },
+    {
+      "sheet_name": "Individual Orders",
+      "formatting": [
+        {
+          "type": "range",
+          "start": "A:A",
+          "background_color": "green",
+          "width": 5,
+          "note": "narrow column for optical separation"
+        },
+        {
+          "type": "range",
+          "start": "B2",
+          "value": "Carbon Emissions Report",
+          "text": {
+            "font_color": "blue",
+            "font_size": 14,
+            "bold": true
+          },
+          "note": "Title of the sheet"
+        },
+        {
+          "type": "range",
+          "start": "B3",
+          "end": "C3",
+          "background_color": "blue",
+          "text": {
+            "font_color": "black",
+            "font_size": 12,
+            "bold": true
+          }
+        },
+        {
+          "type": "range",
+          "start": "A4",
+          "value": "Total emissions"
+        },
+        {
+          "type": "range",
+          "start": "C4",
+          "data": {
+            "query": "emission_data",
+            "formula": {
+              "column": "co2e_kg",
+              "function": "sum"
+            }
+          },
+          "text": {
+            "font_color": "black",
+            "font_size": 12,
+            "number_format": "#,##0.00"
+          }
+        },
+        {
+          "type": "table",
+          "start": "C6",
+          "data": {
+            "query": "emission_data"
+          },
+          "columns": [
+            {
+              "display_name": "Order ID",
+              "sql_name": "id_order"
+            },
+            {
+              "display_name": "Accounting Month",
+              "sql_name": "accounting_month"
+            },
+            {
+              "display_name": "CO2e (kg)",
+              "sql_name": "co2e_kg",
+                "text": {
+                    "number_format": "#,##0.00"
+                }
+            },
+            {
+              "display_name": "Customer",
+              "sql_name": "customer"
+            },
+            {
+              "display_name": "Contractor",
+              "sql_name": "contractor"
+            },
+            {
+              "display_name": "Mode",
+              "sql_name": "mode"
+            },
+            {
+              "display_name": "Vehicle",
+              "sql_name": "vehicle"
+            },
+            {
+              "display_name": "Weight (kg)",
+              "sql_name": "weight_kg",
+              "text": {
+                "number_format": "#,##0.00"
+              }
+            },
+            {
+              "display_name": "Distance (km)",
+              "sql_name": "distance_km",
+              "text": {
+                "font_color": "black",
+                "font_size": 12,
+                "bold": true,
+                "underline": "single"
+              },
+              "column_format": {
+                "background_color": "yellow",
+                "text": {
+                  "font_color": "black",
+                  "font_size": 12,
+                  "number_format": "#,##0.00",
+                  "italic": true
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
